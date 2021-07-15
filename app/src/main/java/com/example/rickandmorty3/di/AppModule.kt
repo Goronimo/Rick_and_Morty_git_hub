@@ -1,6 +1,11 @@
 package com.example.rickandmorty3.di
 
+import android.app.Application
+import android.content.Context
+import androidx.room.Room
 import com.example.rickandmorty3.data.local.CharacterLocalDataSource
+import com.example.rickandmorty3.data.local.CharactersDao
+import com.example.rickandmorty3.data.local.RickAndMortyDatabase
 import com.example.rickandmorty3.data.remote.CharacterRemoteDataSource
 import com.example.rickandmorty3.data.remote.RickAndMortyAPI
 import com.example.rickandmorty3.data.repository.CharacterRepository
@@ -15,6 +20,24 @@ import javax.inject.Singleton
 
 @Module
 class AppModule {
+
+    @Provides
+    @Singleton
+    fun provideDataBase(context: Application): RickAndMortyDatabase{
+        return Room.databaseBuilder(
+            context.applicationContext,
+            RickAndMortyDatabase::class.java,
+            "rick_and_morty_database"
+        )
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideCharactersDao(database: RickAndMortyDatabase) : CharactersDao {
+        return database.charactersDao()
+    }
 
     @Provides
     @Singleton

@@ -7,6 +7,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmorty3.R
+import com.example.rickandmorty3.RickAndMortyApplication
+import com.example.rickandmorty3.di.UniversalViewModelFactory
 import com.example.rickandmorty3.fragment.adapter.CharactersAdapter
 import com.example.rickandmorty3.fragment.adapter.ItemDecoration
 import javax.inject.Inject
@@ -25,10 +27,19 @@ class CharactersFragment : Fragment(R.layout.fragment_characters_list),
     private var lastVisibleItem = 0
     private var totalItemCount = 0
 
+    // запровайдили
+    @Inject
+    lateinit var universalFactory: UniversalViewModelFactory
+
     lateinit var adapter: CharactersAdapter
     lateinit var recycler: RecyclerView
 
-    private val viewModel: CharactersViewModel by activityViewModels()
+    private val viewModel: CharactersViewModel by activityViewModels { universalFactory }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        RickAndMortyApplication.appComponent.inject(this)
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

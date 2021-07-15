@@ -1,7 +1,5 @@
 package com.example.rickandmorty3.data.local
 
-import android.content.Context
-import androidx.room.Room
 import com.example.rickandmorty3.data.model.db.LocationDbModel
 import io.reactivex.Completable
 import io.reactivex.Single

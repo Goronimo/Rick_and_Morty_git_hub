@@ -3,9 +3,7 @@ package com.example.rickandmorty3.di
 import android.app.Application
 import android.content.Context
 import androidx.room.Room
-import com.example.rickandmorty3.data.local.CharacterLocalDataSource
-import com.example.rickandmorty3.data.local.CharactersDao
-import com.example.rickandmorty3.data.local.RickAndMortyDatabase
+import com.example.rickandmorty3.data.local.*
 import com.example.rickandmorty3.data.remote.CharacterRemoteDataSource
 import com.example.rickandmorty3.data.remote.RickAndMortyAPI
 import com.example.rickandmorty3.data.repository.CharacterRepository
@@ -37,6 +35,18 @@ class AppModule {
     @Singleton
     fun provideCharactersDao(database: RickAndMortyDatabase) : CharactersDao {
         return database.charactersDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideLocationDao(database: RickAndMortyDatabase) : LocationDao {
+        return database.locationDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideEpisodeDao(database: RickAndMortyDatabase) : EpisodeDao {
+        return database.episodeDao()
     }
 
     @Provides

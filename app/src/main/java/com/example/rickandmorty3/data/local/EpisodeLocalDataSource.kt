@@ -9,20 +9,9 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class EpisodeLocalDataSource @Inject constructor() {
-
-    private lateinit var database: RickAndMortyDatabase
-
-    private val episodeDao by lazy { database.episodeDao() }
-    fun init(context: Context){
-        database = Room.databaseBuilder(
-            context.applicationContext,
-            RickAndMortyDatabase::class.java,
-            "rick_and_morty_database"
-        )
-            .fallbackToDestructiveMigration()
-            .build()
-    }
+class EpisodeLocalDataSource @Inject constructor(
+    private val episodeDao: EpisodeDao
+) {
 
     fun getAllEpisode(page:Int): Single<List<EpisodeDbModel>> {
         return  episodeDao.getAllEpisode(page)

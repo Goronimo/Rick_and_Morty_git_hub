@@ -9,21 +9,9 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class LocationLocalDataSource @Inject constructor(){
-
-    private lateinit var database: RickAndMortyDatabase
-
-    private val locationDao by lazy { database.locationDao() }
-
-    fun init(context: Context){
-        database = Room.databaseBuilder(
-            context.applicationContext,
-            RickAndMortyDatabase::class.java,
-            "rick_and_morty_database"
-        )
-            .fallbackToDestructiveMigration()
-            .build()
-    }
+class LocationLocalDataSource @Inject constructor(
+    private val locationDao: LocationDao
+){
 
     fun getAllLocation(page: Int): Single<List<LocationDbModel>> {
         return locationDao.getAllLocation(page)

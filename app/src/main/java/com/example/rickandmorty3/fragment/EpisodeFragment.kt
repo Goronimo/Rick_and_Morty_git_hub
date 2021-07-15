@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmorty3.R
+import com.example.rickandmorty3.RickAndMortyApplication
 import com.example.rickandmorty3.di.UniversalViewModelFactory
 import com.example.rickandmorty3.fragment.adapter.EpisodeAdapter
 import com.example.rickandmorty3.fragment.adapter.ItemDecoration
@@ -34,7 +35,15 @@ class EpisodeFragment : Fragment(R.layout.episode_fragment) {
 //        ViewModelProvider(this).get(EpisodeViewModel::class.java)
 //    }
 
-    private  val viewModel: EpisodeViewModel by activityViewModels()
+    @Inject
+    lateinit var universalFactory: UniversalViewModelFactory
+
+    private  val viewModel: EpisodeViewModel by viewModels { universalFactory }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        RickAndMortyApplication.appComponent.inject(this)
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

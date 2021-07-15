@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="2dp"
     app:cardElevation="2dp"
-    app:cardUseCompatPadding="false"
-    app:cardPreventCornerOverlap="true">
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="false">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,21 +14,23 @@
 
         <TextView
             android:id="@+id/episode_name"
-            android:text="name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/air_data"
-            android:text="air data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:text="air data"
             app:layout_constraintStart_toStartOf="@+id/episode_name"
-            app:layout_constraintTop_toBottomOf="@id/create_name_episode"/>
+            app:layout_constraintTop_toBottomOf="@id/create_name_episode" />
+
         <TextView
             android:id="@+id/create_name_episode"
             android:layout_width="0dp"
@@ -40,7 +41,8 @@
             android:text="TextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/episode_name"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/create_data_episode"
             android:layout_width="0dp"
@@ -50,7 +52,8 @@
             android:text="TextView"
             app:layout_constraintEnd_toEndOf="@+id/create_name_episode"
             app:layout_constraintStart_toEndOf="@+id/air_data"
-            app:layout_constraintTop_toBottomOf="@+id/create_name_episode"/>
+            app:layout_constraintTop_toBottomOf="@+id/create_name_episode" />
+
         <TextView
             android:id="@+id/episode"
             android:layout_width="wrap_content"
@@ -58,7 +61,8 @@
             android:layout_marginTop="8dp"
             android:text="episode"
             app:layout_constraintStart_toStartOf="@+id/air_data"
-            app:layout_constraintTop_toBottomOf="@+id/create_data_episode"/>
+            app:layout_constraintTop_toBottomOf="@+id/create_data_episode" />
+
         <TextView
             android:id="@+id/create_episod_episode"
             android:layout_width="0dp"
@@ -70,7 +74,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/create_data_episode"
             app:layout_constraintStart_toEndOf="@+id/episode"
-            app:layout_constraintTop_toBottomOf="@+id/create_data_episode"/>
+            app:layout_constraintTop_toBottomOf="@+id/create_data_episode" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

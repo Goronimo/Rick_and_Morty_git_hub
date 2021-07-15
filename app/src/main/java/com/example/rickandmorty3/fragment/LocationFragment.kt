@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmorty3.R
+import com.example.rickandmorty3.RickAndMortyApplication
 import com.example.rickandmorty3.di.UniversalViewModelFactory
 import com.example.rickandmorty3.fragment.adapter.ItemDecoration
 import com.example.rickandmorty3.fragment.adapter.LocationAdapter
@@ -36,7 +37,15 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
 //        ViewModelProvider(this).get(LocationViewModel::class.java)
 //    }
 
-    private val viewModel: LocationViewModel by activityViewModels()
+    @Inject
+    lateinit var universalFactory: UniversalViewModelFactory
+
+    private val viewModel: LocationViewModel by viewModels { universalFactory }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        RickAndMortyApplication.appComponent.inject(this)
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

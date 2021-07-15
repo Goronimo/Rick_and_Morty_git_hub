@@ -1,12 +1,13 @@
 package com.example.rickandmorty3.fragment.adapter
 
+import android.animation.ValueAnimator
+import android.animation.ValueAnimator.REVERSE
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmorty3.R
-import com.example.rickandmorty3.data.model.api.EpisodeApiModel
 import com.example.rickandmorty3.domain.model.EpisodeDomainModel
 
 class EpisodeAdapter : RecyclerView.Adapter<EpisodeAdapter.MyViewHolder>() {
@@ -33,6 +34,16 @@ class EpisodeAdapter : RecyclerView.Adapter<EpisodeAdapter.MyViewHolder>() {
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val episod: EpisodeDomainModel = episode[position]
+
+        holder.itemView.translationX
+
+        val animator = ValueAnimator.ofFloat(0f, 1f)
+        animator.repeatMode = REVERSE
+        animator.duration = 1000
+        animator.addUpdateListener {
+            holder.name.alpha = it.animatedFraction
+        }
+        animator.start()
         holder.name.text = episod.name
         holder.airData.text = episod.airDate
         holder.episode.text = episod.episode

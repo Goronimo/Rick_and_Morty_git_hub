@@ -1,5 +1,6 @@
 package com.example.rickandmorty3.fragment
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -42,11 +43,13 @@ class LocationViewModel @Inject constructor(
             .doOnEach { loading = false }
             .subscribeOn((Schedulers.io()))
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
+            .subscribe ({
                 val newCharacters = _location.value?.toMutableList() ?: mutableListOf()
                 newCharacters.addAll(it)
                 _location.value = newCharacters
-            }.apply {
+            }, { throwable ->
+                Log.d("error", "no more location", throwable)
+            }).apply {
                 compositeDisposable.add(this)
             }
         pageSubject.onNext(1)

@@ -1,5 +1,6 @@
 package com.example.rickandmorty3.fragment
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -43,11 +44,13 @@ class EpisodeViewModel @Inject constructor(
             .doOnEach { loading = false }
             .subscribeOn((Schedulers.io()))
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
+            .subscribe ({
                 val newCharacters = _episode.value?.toMutableList() ?: mutableListOf()
                 newCharacters.addAll(it)
                 _episode.value = newCharacters
-            }.apply {
+            }, { throwable ->
+                Log.d("error", "no more episode", throwable)
+            }).apply {
                 compositeDisposable.add(this)
             }
         pageSubject.onNext(1)
